@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        collectedText.text = "Items Collecter: " + collectedAmount;
+        collectedText.text = "Items Collected: " + collectedAmount;
 
     }
 

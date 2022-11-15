@@ -1,0 +1,135 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+public enum EnemyState
+{
+    Wander,
+    Follow,
+    Attack,
+    Die
+};
+
+public class EnemyController : MonoBehaviour
+{
+
+    GameObject player;
+    public EnemyState currentState = EnemyState.Wander;
+
+    public float range; //Range and speed of the enemy
+    public float speed;
+    public float attackRange;
+    public float attackCooldown;
+    public int damage;
+
+    private bool chooseDir = false;
+    private bool cooldownAttack = false;
+    private bool dead = false;
+    private Vector3 randomDir;
+    
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        switch (currentState) //finite state machine
+        {
+            case (EnemyState.Wander):
+                Wander();
+            break;
+
+            case (EnemyState.Follow):
+                Follow();
+            break;
+
+            case (EnemyState.Die):
+                
+            break;
+
+            case (EnemyState.Attack):
+                Attack();
+            break;
+        }
+
+        if(IsPlayerInRange(range) && currentState != EnemyState.Die)
+        {
+            currentState = EnemyState.Follow;
+        }
+        else if(!IsPlayerInRange(range) && currentState != EnemyState.Die)
+        {
+            currentState = EnemyState.Wander;
+
+        }
+
+        if (Vector3.Distance(transform.position,player.transform.position) <= attackRange )
+        {
+            currentState = EnemyState.Attack;
+        }
+
+    }
+
+    private bool IsPlayerInRange(float range)
+    {
+        return Vector3.Distance(transform.position, player.transform.position) <= range; //Verifica daca playrul este in range-ul inamicului
+    }
+
+
+    private IEnumerator ChooseDir()
+    {
+        chooseDir = true;
+        yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 8f)); // asteapta intre 2 - 8 sec
+        randomDir = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));//Un vector care ne da o directie random in care se va rotii obiectul
+        Quaternion nextRotaton = Quaternion.Euler(randomDir); //Quaternion se foloseste pentru rotatiile obiectelor
+        transform.rotation = Quaternion.Lerp(transform.rotation, nextRotaton, UnityEngine.Random.Range(0.5f, 2.5f));//O tranzitie intre cele 2 rotatii intr-un timp random
+        chooseDir = false;
+    }
+    void Wander()
+    {
+        if (!chooseDir)
+        {
+            StartCoroutine(ChooseDir());
+        }
+
+        transform.position += -transform.right * speed * Time.deltaTime;
+        if (IsPlayerInRange(range))
+        {
+            currentState = EnemyState.Follow;
+        }
+    }
+
+    void Follow()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position,speed*Time.deltaTime);
+    }
+
+    void Attack()
+    {
+        if (!cooldownAttack)
+        {
+            GameController.DamagePlayer(damage);
+            StartCoroutine(Cooldown());
+        }
+        
+    }
+
+    private IEnumerator Cooldown()
+    {
+        cooldownAttack = true;
+        yield return new WaitForSeconds(attackCooldown);
+        cooldownAttack = false;
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
+    }
+}
