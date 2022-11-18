@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,12 @@ public class GameController : MonoBehaviour
 
     public static GameController instance;
 
-    private static int health = 10;
-    public static int Health { get => health;set => health = value; }
+    private static float health = 6;
+    public static float Health { get => health;set => health = value; }
     public Text healthText;
 
-    private static int maxHealth = 10;
-    public static int MaxHealth { get => maxHealth;set => maxHealth = value; }
+    private static float maxHealth = 6;
+    public static float MaxHealth { get => maxHealth;set => maxHealth = value; }
 
     private static float moveSpeed = 5f;
     public static float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
@@ -23,6 +24,9 @@ public class GameController : MonoBehaviour
 
     private static float bulletSpeed = 7f;
     public static float BulletSpeed { get => bulletSpeed; set => bulletSpeed = value; }
+
+    private static float bulletSize = 0.5f;
+    public static float BulletSize { get => bulletSize; set => bulletSize = value; }
 
     private static float bulletLifetime = 1f;
     public static float BulletLifetime { get => bulletLifetime; set => bulletLifetime = value; }
@@ -57,9 +61,29 @@ public class GameController : MonoBehaviour
 
     }
 
-    public static void HealPlayer(int healAmount)
+    public static void HealPlayer(float healAmount)
     {
         health = Mathf.Min(maxHealth, health + healAmount);
+    }
+
+    public static void MoveSpeedChange (float speed)
+    {
+        moveSpeed += speed;
+    }
+
+    public static void FireRateChange(float rate) //Tine minte : rate negativ creste dellay-ul(tragi mai incet) si rate pozitiv il scare (tragi mai repede)
+    {                                          
+        fireRate -= rate;
+    }
+
+    public static void BulletSizeChange(float size)
+    {
+        bulletSize += size;
+    }
+
+    internal static void MaxHealthChange(float health)
+    {
+        maxHealth += health;
     }
 
     public static void KillPlayer()

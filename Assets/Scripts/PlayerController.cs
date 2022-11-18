@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        fireDelay = GameController.FireRate;
+        speed = GameController.MoveSpeed;
+
         float horizontal = Input.GetAxis("Horizontal"); //Iau inputul de pe axele pt movement
         float vertical = Input.GetAxis("Vertical");
 
