@@ -13,11 +13,19 @@ public enum EnemyState
     Die
 };
 
+public enum EnemyType
+{
+    Mele,
+    Ranged
+};
+
+
 public class EnemyController : MonoBehaviour
 {
 
     GameObject player;
     public EnemyState currentState = EnemyState.Wander;
+    public EnemyType enemyType;
 
     public float range; //Range and speed of the enemy
     public float speed;
@@ -28,7 +36,10 @@ public class EnemyController : MonoBehaviour
     private bool chooseDir = false;
     private bool cooldownAttack = false;
     private bool dead = false;
+
     private Vector3 randomDir;
+
+    public GameObject bulletPrefab;
     
 
     // Start is called before the first frame update
@@ -115,8 +126,24 @@ public class EnemyController : MonoBehaviour
     {
         if (!cooldownAttack)
         {
-            GameController.DamagePlayer(damage);
-            StartCoroutine(Cooldown());
+            switch (enemyType)
+            {
+                case EnemyType.Mele:
+
+                    GameController.DamagePlayer(damage);
+                    StartCoroutine(Cooldown());
+                break;
+
+                case EnemyType.Ranged:
+
+                    GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity) as GameObject;
+                    bullet.GetComponent<BulletController>().GetPlayer(player.transform);
+                    bullet.AddComponent<Rigidbody2D>().gravityScale = 0;
+                    bullet.GetComponent<BulletController>().isEnemyBullet = true;
+                    StartCoroutine(Cooldown());
+                break;
+            }
+            
         }
         
     }
