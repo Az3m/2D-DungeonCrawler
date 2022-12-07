@@ -11,7 +11,6 @@ public class GameController : MonoBehaviour
 
     private static float health = 6;
     public static float Health { get => health;set => health = value; }
-    public Text healthText;
 
     private static float maxHealth = 6;
     public static float MaxHealth { get => maxHealth;set => maxHealth = value; }
@@ -45,7 +44,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + health;
+        
     }
 
     public static void DamagePlayer (int damage)
