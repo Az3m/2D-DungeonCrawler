@@ -28,6 +28,8 @@ public class RoomController : MonoBehaviour
     public List<Room> loadedRooms = new List<Room>();
 
     bool isLoadingRoom = false;
+    bool spawnedBossRoom = false;
+    bool updatedRooms = false;
 
     private void Awake()
     {
@@ -58,6 +60,10 @@ public class RoomController : MonoBehaviour
         }
         if (loadRoomQueue.Count == 0)
         {
+            if (!spawnedBossRoom)
+            {
+                StartCoroutine(SpawnBossRoom());
+            }
             return;
         }
 
@@ -65,6 +71,11 @@ public class RoomController : MonoBehaviour
         isLoadingRoom = true;
         
         StartCoroutine(LoadRoomRoutine(currentLoadRoomData));
+    }
+
+    IEnumerator SpawnBossRoom()
+    {
+
     }
 
     public void LoadRoom(string name,int x, int y)
@@ -113,7 +124,7 @@ public class RoomController : MonoBehaviour
             }
 
             loadedRooms.Add(room);
-            room.RemoveUnconnectedDoors();
+            
         }
         else
         {

@@ -8,6 +8,7 @@ public class DungeonGenerator : MonoBehaviour
     private List<Vector2Int> dungeonRooms;
 
 
+
     private void Start()
     {
         dungeonRooms = DungeonCrawlerController.GenerateDungeon(dungeonGenerationData);
@@ -22,6 +23,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         //Creaza o camera de inceput "Start" si pentru fiecare crawler creaza cate o camera in fiecare directie pe care acestia o aleg
         RoomController.instance.LoadRoom("Start", 0, 0);
+
         foreach(Vector2Int roomLocation in rooms)
         {
             if (roomLocation == dungeonRooms[dungeonRooms.Count - 1] && !(roomLocation == Vector2Int.zero))

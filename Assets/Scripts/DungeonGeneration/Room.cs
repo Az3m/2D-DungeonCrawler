@@ -11,10 +11,14 @@ public class Room : MonoBehaviour
     public int X;
     public int Y;
 
+
+
     public Door leftDoor;
     public Door rightDoor;
     public Door topDoor;
     public Door bottomDoor;
+
+
 
     public List<Door> doors = new List<Door>();
     // Start is called before the first frame update
@@ -60,7 +64,7 @@ public class Room : MonoBehaviour
             switch (door.doorType)
             {
                 case Door.DoorType.right:
-                    if(GetRight() == null)
+                    if(GetRight() == null) //Daca nu are vecin in directia aleasa vom seta vizibilitatea usii din acea directie ca fals
                     {
                         door.gameObject.SetActive(false);
                     }
@@ -90,7 +94,7 @@ public class Room : MonoBehaviour
         }
     }
 
-
+    //verifica daca vecinul din fiecare directia al camerei exista
     public Room GetRight()
     {
         if (RoomController.instance.DoesRoomExist(X + 1, Y))
@@ -137,6 +141,7 @@ public class Room : MonoBehaviour
             return null;
         }
     }
+
 
     private void OnDrawGizmos()
     {
