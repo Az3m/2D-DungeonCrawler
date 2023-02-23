@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using System.Linq;
 
 public class RoomInfo
 {
@@ -63,6 +64,14 @@ public class RoomController : MonoBehaviour
             if (!spawnedBossRoom)
             {
                 StartCoroutine(SpawnBossRoom());
+            } 
+            else if (spawnedBossRoom && !updatedRooms)
+            {
+                foreach (Room room in loadedRooms)
+                {
+                    room.RemoveUnconnectedDoors();
+                }
+                updatedRooms = true;
             }
             return;
         }
@@ -75,7 +84,24 @@ public class RoomController : MonoBehaviour
 
     IEnumerator SpawnBossRoom()
     {
+        spawnedBossRoom = true;
+        int loadedRoomsCount = loadedRooms.Count;
+        yield return new WaitForSeconds(0.5f);// astept jumatate de secunda sa fiu sigur ca toate camerele au fost create
 
+
+        if (loadRoomQueue.Count == 0)
+        {
+            Room bossRoom = loadedRooms[loadedRooms.Count - 1];
+            Room tempRoom = new Room(bossRoom.X, bossRoom.Y);
+
+            Destroy(bossRoom.gameObject);
+
+            var roomToRemove = loadedRooms.Single(room => room.X == tempRoom.X && room.Y == tempRoom.Y); //AICI MODIFIC CUM SE GENEREAZA CAMERA BOSSULUI
+
+            loadedRooms.Remove(roomToRemove);
+
+            LoadRoom("End", tempRoom.X, tempRoom.Y);
+        }
     }
 
     public void LoadRoom(string name,int x, int y)

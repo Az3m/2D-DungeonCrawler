@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -10,6 +11,16 @@ public class Room : MonoBehaviour
 
     public int X;
     public int Y;
+
+
+
+    private bool updatedDoors = false;
+
+    public Room(int x , int y)
+    {
+        X = x;
+        Y = y;
+    }
 
 
 
@@ -57,6 +68,15 @@ public class Room : MonoBehaviour
         RoomController.instance.RegisterRoom(this);
     }
 
+    private void Update()
+    {
+        if (name.Contains("End") && !updatedDoors) //sterge usile in plus de la camera bossului
+        {
+            RemoveUnconnectedDoors();
+            updatedDoors = true;
+        }
+    }
+
     public void RemoveUnconnectedDoors()
     {
         foreach(Door door in doors)
@@ -67,6 +87,7 @@ public class Room : MonoBehaviour
                     if(GetRight() == null) //Daca nu are vecin in directia aleasa vom seta vizibilitatea usii din acea directie ca fals
                     {
                         door.gameObject.SetActive(false);
+
                     }
                     break;
 
@@ -74,6 +95,7 @@ public class Room : MonoBehaviour
                     if (GetLeft() == null)
                     {
                         door.gameObject.SetActive(false);
+
                     }
                     break;
 
@@ -81,6 +103,7 @@ public class Room : MonoBehaviour
                     if (GetTop() == null)
                     {
                         door.gameObject.SetActive(false);
+
                     }
                     break;
 
@@ -88,6 +111,7 @@ public class Room : MonoBehaviour
                     if (GetBottom() == null)
                     {
                         door.gameObject.SetActive(false);
+
                     }
                     break;
             }
