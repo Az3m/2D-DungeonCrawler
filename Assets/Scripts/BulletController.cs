@@ -58,13 +58,13 @@ public class BulletController : MonoBehaviour
     {
         if(collision.tag == "Enemy" && !isEnemyBullet )
         {
-            collision.gameObject.GetComponent<EnemyController>().Death();
+            collision.gameObject.GetComponent<EnemyController>().EnemyTakeDamage(GameController.PlayerDamage);
             Destroy(gameObject);
         }
 
         if(collision.tag == "Player" && isEnemyBullet)
         {
-            GameController.DamagePlayer(1);
+            GameController.DamagePlayer(GameController.RangedEnemyDamage);
             Destroy(gameObject);
         }
     }

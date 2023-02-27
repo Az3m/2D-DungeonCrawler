@@ -124,9 +124,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2deae3de3207583438137ee0cccfe489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyDrops:
+  - gameObject: {fileID: 91795529843180876, guid: 4724e127047dae0429a9d307f23271c3, type: 3}
+    weigth: 0.5
+  - gameObject: {fileID: 7139545134698496736, guid: eb404e772440de742864b37ff0a27d39, type: 3}
+    weigth: 0.4
+  - gameObject: {fileID: 5180845733507274567, guid: 80aeb506901ba5e4c85e2d76a379fe0e, type: 3}
+    weigth: 0.1
   currentState: 0
+  enemyType: 0
+  health: 5
   range: 5
   speed: 2
   attackRange: 1
   attackCooldown: 1.5
-  damage: 1
+  enemyDamage: 1
+  bulletPrefab: {fileID: 0}

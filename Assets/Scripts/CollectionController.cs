@@ -17,6 +17,7 @@ public class CollectionController : MonoBehaviour
     public Item item;
     public float healAmount;
     public float healthChange;
+    public float damageChange;
     public float moveSpeedChange;
     public float shootDelayChange;
     public float bulletSizeChange;
@@ -38,6 +39,7 @@ public class CollectionController : MonoBehaviour
             PlayerController.collectedAmount += 1;
             GameController.HealPlayer(healAmount);
             GameController.MaxHealthChange(healthChange);
+            GameController.DamageChange(damageChange);
             GameController.MoveSpeedChange(moveSpeedChange);
             GameController.FireRateChange(shootDelayChange);
             GameController.BulletSizeChange(bulletSizeChange);

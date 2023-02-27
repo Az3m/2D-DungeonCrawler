@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2625149073285005673}
   - component: {fileID: 2625149073285005674}
   - component: {fileID: 2625149073285005675}
-  - component: {fileID: 2625149073285005672}
+  - component: {fileID: 1940648135}
   m_Layer: 0
   m_Name: Ranged Enemy
   m_TagString: Enemy
@@ -112,7 +112,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2625149073285005672
+--- !u!114 &1940648135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,11 +124,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2deae3de3207583438137ee0cccfe489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyDrops:
+  - gameObject: {fileID: 91795529843180876, guid: 4724e127047dae0429a9d307f23271c3, type: 3}
+    weigth: 0.5
+  - gameObject: {fileID: 7139545134698496736, guid: eb404e772440de742864b37ff0a27d39, type: 3}
+    weigth: 0.3
+  - gameObject: {fileID: 5180845733507274567, guid: 80aeb506901ba5e4c85e2d76a379fe0e, type: 3}
+    weigth: 0.2
   currentState: 0
   enemyType: 1
+  health: 3
   range: 10
   speed: 2
   attackRange: 5
   attackCooldown: 1.5
-  damage: 1
+  enemyDamage: 2
   bulletPrefab: {fileID: 1407216131686363240, guid: 6fa5d89a25874dc4a811a22b362a859d, type: 3}

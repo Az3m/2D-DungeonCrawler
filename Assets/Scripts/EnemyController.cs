@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
 public enum EnemyState
 {
@@ -22,16 +23,29 @@ public enum EnemyType
 
 public class EnemyController : MonoBehaviour
 {
+    [System.Serializable]
+    public struct Spawnable
+    {
+        public GameObject gameObject;
+        public float weigth;
+    }
+
+    public List<Spawnable> enemyDrops = new List<Spawnable>();
+
+    float totalEnemyDropsWeigth;
+
+
 
     GameObject player;
     public EnemyState currentState = EnemyState.Wander;
     public EnemyType enemyType;
 
+    public float health;
     public float range; //Range and speed of the enemy
     public float speed;
     public float attackRange;
     public float attackCooldown;
-    public int damage;
+    public int enemyDamage;
 
     private bool chooseDir = false;
     private bool cooldownAttack = false;
@@ -40,7 +54,15 @@ public class EnemyController : MonoBehaviour
     private Vector3 randomDir;
 
     public GameObject bulletPrefab;
-    
+
+    private void Awake()
+    {
+        totalEnemyDropsWeigth = 0;
+        foreach (var spawnable in enemyDrops)
+        {
+            totalEnemyDropsWeigth += spawnable.weigth;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +74,8 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        enemyDamage = GameController.EnemyDamage;
+
         switch (currentState) //finite state machine
         {
             case (EnemyState.Wander):
@@ -130,7 +154,7 @@ public class EnemyController : MonoBehaviour
             {
                 case EnemyType.Mele:
 
-                    GameController.DamagePlayer(damage);
+                    GameController.DamagePlayer(enemyDamage);
                     StartCoroutine(Cooldown());
                 break;
 
@@ -147,6 +171,14 @@ public class EnemyController : MonoBehaviour
         }
         
     }
+    public void EnemyTakeDamage(float playerDmg)
+    {
+        health -= playerDmg;
+        if(health <= 0)
+        {
+            Death();
+        }
+    }
 
     private IEnumerator Cooldown()
     {
@@ -158,5 +190,23 @@ public class EnemyController : MonoBehaviour
     public void Death()
     {
         Destroy(gameObject);
+        SpawnItemOnEnemyDeath();
+        
+    }
+
+    public void SpawnItemOnEnemyDeath()
+    {
+        float pick = UnityEngine.Random.value * totalEnemyDropsWeigth;
+        int chosenIndex = 0;
+        float cumulativeWeigth = enemyDrops[0].weigth;
+
+        while (pick > cumulativeWeigth && chosenIndex < enemyDrops.Count - 1)
+        {
+            chosenIndex++;
+            cumulativeWeigth += enemyDrops[chosenIndex].weigth;
+        }
+
+        GameObject i = Instantiate(enemyDrops[chosenIndex].gameObject, transform.position, Quaternion.identity) as GameObject;
+
     }
 }

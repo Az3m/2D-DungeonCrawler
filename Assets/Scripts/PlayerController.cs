@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed;
     private float lastFire;
     public float fireDelay;
+    public float playerDamage;
 
 
     // Start is called before the first frame update
@@ -24,8 +25,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Controale pentru miscare si shooting
+
         fireDelay = GameController.FireRate;
         speed = GameController.MoveSpeed;
+        playerDamage = GameController.PlayerDamage;
 
         float horizontal = Input.GetAxis("Horizontal"); //Iau inputul de pe axele pt movement
         float vertical = Input.GetAxis("Vertical");
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    //Creaza si gestioneaza bulletul creat cand tragem
     void Shoot(float x,float y)
     {
         GameObject bullet = Instantiate (bulletPrefab,transform.position,transform.rotation) as GameObject; //Initiem prefa-ul bullet cu pozitiile x y z ale playerului
