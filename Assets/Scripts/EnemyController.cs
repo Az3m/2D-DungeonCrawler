@@ -8,6 +8,7 @@ using static UnityEditor.Progress;
 
 public enum EnemyState
 {
+    Idle,
     Wander,
     Follow,
     Attack,
@@ -37,7 +38,7 @@ public class EnemyController : MonoBehaviour
 
 
     GameObject player;
-    public EnemyState currentState = EnemyState.Wander;
+    public EnemyState currentState = EnemyState.Idle; //Default enemy state
     public EnemyType enemyType;
 
     public float health;
@@ -46,6 +47,7 @@ public class EnemyController : MonoBehaviour
     public float attackRange;
     public float attackCooldown;
     public int enemyDamage;
+    public bool notInRoom = false;
 
     private bool chooseDir = false;
     private bool cooldownAttack = false;
@@ -78,6 +80,10 @@ public class EnemyController : MonoBehaviour
 
         switch (currentState) //finite state machine
         {
+            case (EnemyState.Idle):
+                //Idle();
+            break;
+
             case (EnemyState.Wander):
                 Wander();
             break;
@@ -95,20 +101,27 @@ public class EnemyController : MonoBehaviour
             break;
         }
 
-        if(IsPlayerInRange(range) && currentState != EnemyState.Die)
+        if (!notInRoom)
         {
-            currentState = EnemyState.Follow;
-        }
-        else if(!IsPlayerInRange(range) && currentState != EnemyState.Die)
-        {
-            currentState = EnemyState.Wander;
+            if (IsPlayerInRange(range) && currentState != EnemyState.Die)
+            {
+                currentState = EnemyState.Follow;
+            }
+            else if (!IsPlayerInRange(range) && currentState != EnemyState.Die)
+            {
+                currentState = EnemyState.Wander;
 
+            }
+
+            if (Vector3.Distance(transform.position, player.transform.position) <= attackRange)
+            {
+                currentState = EnemyState.Attack;
+            }
+        }else
+        {
+            currentState = EnemyState.Idle;
         }
 
-        if (Vector3.Distance(transform.position,player.transform.position) <= attackRange )
-        {
-            currentState = EnemyState.Attack;
-        }
 
     }
 
@@ -127,6 +140,7 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, nextRotaton, UnityEngine.Random.Range(0.5f, 2.5f));//O tranzitie intre cele 2 rotatii intr-un timp random
         chooseDir = false;
     }
+
     void Wander()
     {
         if (!chooseDir)
@@ -189,6 +203,7 @@ public class EnemyController : MonoBehaviour
 
     public void Death()
     {
+        RoomController.instance.StartCoroutine(RoomController.instance.RoomCoroutine());
         Destroy(gameObject);
         SpawnItemOnEnemyDeath();
         

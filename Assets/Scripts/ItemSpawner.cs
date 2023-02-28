@@ -40,7 +40,7 @@ public class ItemSpawner : MonoBehaviour
             cumulativeWeigth += items[chosenIndex].weigth;
         }
 
-        GameObject i = Instantiate(items[chosenIndex].gameObject, transform.position, Quaternion.identity) as GameObject;
+        GameObject i = Instantiate(items[chosenIndex].gameObject, transform.position, Quaternion.identity,transform) as GameObject;
 
 
 

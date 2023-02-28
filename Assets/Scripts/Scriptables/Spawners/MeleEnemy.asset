@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16bca69835ab45e418f711672da80507, type: 3}
+  m_Name: MeleEnemy
+  m_EditorClassIdentifier: 
+  itemToSpawn: {fileID: 8020116292455456653, guid: d5bc787c41ef4814092308d59e17c7ce, type: 3}
+  minSpawn: 0
+  maxSpawn: 1
