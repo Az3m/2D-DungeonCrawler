@@ -11,9 +11,13 @@ public class Door : MonoBehaviour
     }
 
     public DoorType doorType;
+
     private GameObject player;
-    private float widthOffset = 0;
+
+    private float widthOffset = 1f;
+
     public GameObject DoorCollider;
+    
 
     private void Start()
     {

@@ -55,7 +55,7 @@ public class ItemSpawner : MonoBehaviour
         //pentru a evita o eroare monstrii vor spawna "nothing" ca item spawn si acesta va fi sters, dropurile de la monstrii se vor duce in enemyDrops
         if (GameObject.FindWithTag("Nothing") != null) 
         {
-            Debug.Log("Am sters toate nothingurile");
+            //Debug.Log("Am sters toate nothingurile");
             GameObject[] nothings = GameObject.FindGameObjectsWithTag("Nothing");
             foreach (GameObject nothing in nothings)
             {

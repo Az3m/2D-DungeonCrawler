@@ -208,20 +208,22 @@ public class RoomController : MonoBehaviour
                     foreach (EnemyController enemy in enemies)
                     {
                         enemy.notInRoom = true;
-                        Debug.Log("Not in room");
+                        //Debug.Log("Not in room");
                     }
 
-                    foreach(Door door in room.GetComponentsInChildren<Door>())
-                    {
-                        door.DoorCollider.SetActive(false);
-                    }
+                    //foreach(Door door in room.GetComponentsInChildren<Door>())
+                    //{
+                    //    door.DoorCollider.SetActive(false);
+                    //}
                 }
-                else{
-                    foreach (Door door in room.GetComponentsInChildren<Door>())
-                    {
-                        door.DoorCollider.SetActive(true);
-                    }
-                }
+                //else{
+                //    foreach (Door door in room.GetComponentsInChildren<Door>())
+                //    {
+                //        door.DoorCollider.SetActive(true);
+                //    }
+                //}
+
+               
             }
             else
             {
@@ -243,7 +245,59 @@ public class RoomController : MonoBehaviour
                 {
                     foreach (Door door in room.GetComponentsInChildren<Door>())
                     {
-                        door.DoorCollider.SetActive(false);
+                        switch (door.doorType)
+                        {
+                            case Door.DoorType.right:
+                                if (currentRoom.GetRight() == null)
+                                {
+                                    
+
+                                    door.DoorCollider.gameObject.SetActive(true);
+
+                                }
+                                else
+                                {
+                                    door.DoorCollider.gameObject.SetActive(false);
+                                }
+                                break;
+
+                            case Door.DoorType.left:
+                                if (currentRoom.GetLeft() == null)
+                                {
+                                    //door.gameObject.SetActive(false);
+                                    door.DoorCollider.gameObject.SetActive(true);
+                                }
+                                else
+                                {
+                                    door.DoorCollider.gameObject.SetActive(false);
+                                }
+                                break;
+
+                            case Door.DoorType.top:
+                                if (currentRoom.GetTop() == null)
+                                {
+                                    //door.gameObject.SetActive(false);
+                                    door.DoorCollider.gameObject.SetActive(true);
+                                }
+                                else
+                                {
+                                    door.DoorCollider.gameObject.SetActive(false);
+                                }
+                                break;
+
+                            case Door.DoorType.bottom:
+                                if (currentRoom.GetBottom() == null)
+                                {
+                                    door.DoorCollider.gameObject.SetActive(true);
+
+                                }
+                                else
+                                {
+                                    door.DoorCollider.gameObject.SetActive(false);
+                                }
+                                break;
+                        }
+
                     }
                 }
             }

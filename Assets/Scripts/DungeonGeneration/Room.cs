@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -56,11 +57,11 @@ public class Room : MonoBehaviour
                 break;
 
                 case Door.DoorType.top:
-                    leftDoor = d;
+                    topDoor = d;
                 break;
 
                 case Door.DoorType.bottom:
-                    leftDoor = d;
+                    bottomDoor = d;
                 break;
             }
         }
@@ -81,12 +82,15 @@ public class Room : MonoBehaviour
     {
         foreach(Door door in doors)
         {
+            
             switch (door.doorType)
             {
                 case Door.DoorType.right:
                     if(GetRight() == null) //Daca nu are vecin in directia aleasa vom seta vizibilitatea usii din acea directie ca fals
                     {
-                        door.gameObject.SetActive(false);
+                        //door.gameObject.SetActive(false);
+
+                        door.DoorCollider.gameObject.SetActive(true);
 
                     }
                     break;
@@ -94,23 +98,23 @@ public class Room : MonoBehaviour
                 case Door.DoorType.left:
                     if (GetLeft() == null)
                     {
-                        door.gameObject.SetActive(false);
-
+                        //door.gameObject.SetActive(false);
+                        door.DoorCollider.gameObject.SetActive(true);
                     }
                     break;
 
                 case Door.DoorType.top:
                     if (GetTop() == null)
                     {
-                        door.gameObject.SetActive(false);
-
+                        //door.gameObject.SetActive(false);
+                        door.DoorCollider.gameObject.SetActive(true);
                     }
                     break;
 
                 case Door.DoorType.bottom:
                     if (GetBottom() == null)
                     {
-                        door.gameObject.SetActive(false);
+                        door.DoorCollider.gameObject.SetActive(true);
 
                     }
                     break;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8020116292455456651}
   - component: {fileID: 8020116292455456650}
   - component: {fileID: 8020116292455456649}
+  - component: {fileID: 7834686296087087364}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -134,9 +135,31 @@ MonoBehaviour:
   currentState: 0
   enemyType: 0
   health: 5
-  range: 5
+  range: 20
   speed: 2
   attackRange: 1
   attackCooldown: 1.5
   enemyDamage: 1
+  notInRoom: 0
   bulletPrefab: {fileID: 0}
+--- !u!50 &7834686296087087364
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8020116292455456653}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
