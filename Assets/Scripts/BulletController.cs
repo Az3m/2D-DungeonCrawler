@@ -67,5 +67,10 @@ public class BulletController : MonoBehaviour
             GameController.DamagePlayer(GameController.RangedEnemyDamage);
             Destroy(gameObject);
         }
+
+        if(collision.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
     }
 }

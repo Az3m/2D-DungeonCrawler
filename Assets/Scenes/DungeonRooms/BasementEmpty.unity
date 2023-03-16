@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 17683688}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 50633296}
   m_Layer: 0
   m_Name: WallsForClearedRoom
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -747,7 +747,7 @@ GameObject:
   - component: {fileID: 754759414}
   m_Layer: 0
   m_Name: BottomDoor
-  m_TagString: Door
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -847,7 +847,7 @@ GameObject:
   - component: {fileID: 940635591}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1058,7 +1058,7 @@ GameObject:
   - component: {fileID: 1319932396}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1169,7 +1169,7 @@ GameObject:
   - component: {fileID: 1733277208}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
