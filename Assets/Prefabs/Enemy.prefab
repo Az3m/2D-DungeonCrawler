@@ -134,8 +134,9 @@ MonoBehaviour:
     weigth: 0.1
   currentState: 0
   enemyType: 0
+  rb: {fileID: 7834686296087087364}
   health: 5
-  range: 20
+  range: 15
   speed: 2
   attackRange: 1
   attackCooldown: 1.5

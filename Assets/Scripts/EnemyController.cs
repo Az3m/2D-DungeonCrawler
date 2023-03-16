@@ -9,7 +9,6 @@ using UnityEngine.UIElements;
 public enum EnemyState
 {
     Idle,
-    Wander,
     Follow,
     Attack,
     Die
@@ -41,6 +40,7 @@ public class EnemyController : MonoBehaviour
     public EnemyState currentState = EnemyState.Idle; //Default enemy state
     public EnemyType enemyType;
 
+    public Rigidbody2D rb;
     public float health;
     public float range; //Range and speed of the enemy
     public float speed;
@@ -84,8 +84,6 @@ public class EnemyController : MonoBehaviour
                 //Idle();
             break;
 
-            case (EnemyState.Wander):
-                Wander();
             break;
 
             case (EnemyState.Follow):
@@ -109,7 +107,7 @@ public class EnemyController : MonoBehaviour
             }
             else if (!IsPlayerInRange(range) && currentState != EnemyState.Die)
             {
-                currentState = EnemyState.Wander;
+                currentState = EnemyState.Idle;
 
             }
 
@@ -133,6 +131,7 @@ public class EnemyController : MonoBehaviour
 
     private IEnumerator ChooseDir()
     {
+        
         chooseDir = true;
         yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 8f)); // asteapta intre 2 - 8 sec
         randomDir = new Vector3(0, 0, UnityEngine.Random.Range(0, 360));//Un vector care ne da o directie random in care se va rotii obiectul
@@ -141,23 +140,10 @@ public class EnemyController : MonoBehaviour
         chooseDir = false;
     }
 
-    void Wander()
-    {
-        if (!chooseDir)
-        {
-            StartCoroutine(ChooseDir());
-        }
-
-        transform.position += -transform.right * speed * Time.deltaTime;
-        if (IsPlayerInRange(range))
-        {
-            currentState = EnemyState.Follow;
-        }
-    }
-
     void Follow()
     {
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position,speed*Time.deltaTime);
+
     }
 
     void Attack()

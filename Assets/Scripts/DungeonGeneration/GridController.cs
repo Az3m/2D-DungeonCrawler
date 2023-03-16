@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -18,6 +21,7 @@ public class GridController : MonoBehaviour
     public GameObject gridTile;
     public List<Vector2> availablePoints = new List<Vector2>();
 
+
     private void Awake()
     {
         room = GetComponentInParent<Room>();
@@ -30,19 +34,73 @@ public class GridController : MonoBehaviour
     {
         grid.verticalOffset += room.transform.localPosition.y;
         grid.horizontalOffset += room.transform.localPosition.x;
+        ;
+        var pozitiiInvalide = new List <(int, int)> // acestea sunt toate pozitiile in care nu se pot spawnla monstrii sau iteme
+        {
+            (6,0),//usa jos
+            (7,0),
+            (8,0),
+            (9,0),
+            (10,0),
+            (6,1),
+            (7,1),
+            (8,1),
+            (9,1),
+            (10,1),
+
+            (0,3),//usa stanga
+            (1,3),
+            (2,3),
+            (0,4),
+            (1,4),
+            (2,4),
+            (0,5),
+            (1,5),
+            (2,5),
+
+            (6,7),//usa sus
+            (7,7),
+            (8,7),
+            (9,7),
+            (10,7),
+            (6,8),
+            (7,8),
+            (8,8),
+            (9,8),
+            (10,8),
+
+            (13,3),//usa dreapta
+            (14,3),
+            (15,3),
+            (13,4),
+            (14,4),
+            (15,4),
+            (13,5),
+            (14,5),
+            (15,5)
+        };
 
         for (int y = 0; y < grid.rows; y++)
         {
             for(int x = 0; x < grid.columns; x++)
             {
-                GameObject go = Instantiate(gridTile, transform);
-                go.GetComponent<Transform>().position = new Vector2(x - (grid.columns - grid.horizontalOffset), y - (grid.rows - grid.verticalOffset));
-                go.name = "X: " + x + "Y: " + y;
-                availablePoints.Add(go.transform.position);
-                go.SetActive(false);
+                if (pozitiiInvalide.Any(t => t.Item1 == x && t.Item2 == y))
+                {
+                    
+                }
+                else
+                {
+                    GameObject go = Instantiate(gridTile, transform);
+                    go.GetComponent<Transform>().position = new Vector2(x - (grid.columns - grid.horizontalOffset), y - (grid.rows - grid.verticalOffset));
+                    go.name = "X: " + x + "Y: " + y;
+                    availablePoints.Add(go.transform.position);
+                    go.SetActive(false);
+                }
             }
+                
+        }
 
             GetComponentInParent<ObjectRoomSpawner>().InitializeObjectSpawning();
-        }
+        
     }
 }

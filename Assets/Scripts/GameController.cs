@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
     private static float moveSpeed = 5f;
     public static float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
 
-    private static float playerDamage = 1;
+    private static float playerDamage, playerDamageDefault = 1;
     public static float PlayerDamage { get=> playerDamage; set => playerDamage = value; }
 
     private static int enemyDamage = 1;
@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
     private static int rangedEnemyDamage = 2;
     public static int RangedEnemyDamage { get => rangedEnemyDamage; set => rangedEnemyDamage = value; }
 
-    private static float fireRate = 0.5f;
+    private static float fireRate, fireRateDefault = 0.5f;
     public static float FireRate { get => fireRate; set => fireRate = value; }
 
     private static float bulletSpeed = 7f;
@@ -47,6 +47,10 @@ public class GameController : MonoBehaviour
         {
             instance = this;
         }
+        health = 6;
+        moveSpeed = 5f;
+        playerDamage = 1;
+        fireRate = 0.5f;
         
     }
 
