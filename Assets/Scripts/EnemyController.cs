@@ -176,6 +176,7 @@ public class EnemyController : MonoBehaviour
         health -= playerDmg;
         if(health <= 0)
         {
+            ScoreController.score += 100;
             Death();
         }
     }

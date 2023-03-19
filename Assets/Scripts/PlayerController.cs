@@ -45,6 +45,16 @@ public class PlayerController : MonoBehaviour
             lastFire = Time.time;
         }
 
+        if(GameController.Health <= 0)
+        {
+            GameController.KillPlayer();
+        }
+
+        if(GameController.Health > GameController.MaxHealth)
+        {
+            GameController.Health = GameController.MaxHealth;
+        }
+
 
         collectedText.text = "Items Collected: " + collectedAmount;
 

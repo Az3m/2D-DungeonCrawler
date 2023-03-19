@@ -37,6 +37,7 @@ public class CollectionController : MonoBehaviour
         if (collision.tag == "Player") 
         {   //Aici adaug metode pentru iteme daca vreau sa le modific
             PlayerController.collectedAmount += 1;
+            ScoreController.score += 500;
             GameController.HealPlayer(healAmount);
             GameController.MaxHealthChange(healthChange);
             GameController.DamageChange(damageChange);
