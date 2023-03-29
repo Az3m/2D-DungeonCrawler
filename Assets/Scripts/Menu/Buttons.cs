@@ -16,8 +16,7 @@ public class Buttons : MonoBehaviour
         GameController.FireRate = 0.5f;
         SceneManager.LoadScene(GameStartScene);
         PauseMenu.isPaused = false;
-        Time.timeScale = 1f;
-        
+        Time.timeScale = 1f;  
     }
 
     public void ExitGame()

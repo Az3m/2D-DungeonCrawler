@@ -7,10 +7,10 @@ public class SettingsMenu : MonoBehaviour
 {
     Resolution[] resolutions;
     public TMPro.TMP_Dropdown resolutionDropdown;
-
+    
 
     private void Start()
-    { // Toata chestia asta populeaza dropdown-ul cu rezolutiile pe care le putem folosii si seteaza rezolutia default ca cea folosita deja
+    { 
         resolutions = Screen.resolutions;
         int currResolutionIndex = 0;
 
