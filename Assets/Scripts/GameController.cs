@@ -69,9 +69,6 @@ public class GameController : MonoBehaviour
         {
             KillPlayer();
         }
-
-
-
     }
 
     public static void HealPlayer(float healAmount)
