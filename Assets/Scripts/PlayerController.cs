@@ -25,16 +25,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Controale pentru miscare si shooting
-
-        fireDelay = GameController.FireRate;
+        //Controale pentru miscare obiectului "player"
         speed = GameController.MoveSpeed;
-        playerDamage = GameController.PlayerDamage;
+
 
         float horizontal = Input.GetAxis("Horizontal"); //Iau inputul de pe axele pt movement
         float vertical = Input.GetAxis("Vertical");
 
         rigidbody.velocity = new Vector3(horizontal * speed, vertical * speed, 0); //facem ca rigidbody-ul sa se miste inmultind inputul obtinut cu viteza setata
+
+        //Controale pentru aruncarea de proiectile
+        fireDelay = GameController.FireRate;
+        playerDamage = GameController.PlayerDamage;
 
         float shootHor = Input.GetAxis("ShootHorizontal"); //Iau imputul de pe axele pt shooting
         float shootVert = Input.GetAxis("ShootVertical");
