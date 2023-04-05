@@ -34,50 +34,18 @@ public class GridController : MonoBehaviour
     {
         grid.verticalOffset += room.transform.localPosition.y;
         grid.horizontalOffset += room.transform.localPosition.x;
-        ;
         var pozitiiInvalide = new List <(int, int)> // acestea sunt toate pozitiile in care nu se pot spawnla monstrii sau iteme
-        {
-            (6,0),//usa jos
-            (7,0),
-            (8,0),
-            (9,0),
-            (10,0),
-            (6,1),
-            (7,1),
-            (8,1),
-            (9,1),
-            (10,1),
+        {   //usa jos
+            (6,0),(7,0),(8,0),(9,0),(10,0),(6,1),(7,1),(8,1),(9,1),(10,1),
 
-            (0,3),//usa stanga
-            (1,3),
-            (2,3),
-            (0,4),
-            (1,4),
-            (2,4),
-            (0,5),
-            (1,5),
-            (2,5),
+            //usa stanga
+            (0,3),(1,3),(2,3),(0,4),(1,4),(2,4),(0,5),(1,5),(2,5),
 
-            (6,7),//usa sus
-            (7,7),
-            (8,7),
-            (9,7),
-            (10,7),
-            (6,8),
-            (7,8),
-            (8,8),
-            (9,8),
-            (10,8),
+            //usa sus
+            (6,7),(7,7),(8,7),(9,7),(10,7),(6,8),(7,8),(8,8),(9,8),(10,8),
 
-            (13,3),//usa dreapta
-            (14,3),
-            (15,3),
-            (13,4),
-            (14,4),
-            (15,4),
-            (13,5),
-            (14,5),
-            (15,5)
+            //usa dreapta
+            (13,3),(14,3),(15,3),(13,4),(14,4),(15,4),(13,5),(14,5),(15,5)
         };
 
         for (int y = 0; y < grid.rows; y++)
@@ -94,7 +62,7 @@ public class GridController : MonoBehaviour
                     go.GetComponent<Transform>().position = new Vector2(x - (grid.columns - grid.horizontalOffset), y - (grid.rows - grid.verticalOffset));
                     go.name = "X: " + x + "Y: " + y;
                     availablePoints.Add(go.transform.position);
-                    go.SetActive(false);
+                    //go.SetActive(false);
                 }
             }
                 
