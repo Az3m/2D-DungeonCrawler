@@ -21,7 +21,6 @@ public class DungeonGenerator : MonoBehaviour
 
     private void SpawnRooms (IEnumerable<Vector2Int> rooms)
     {
-        //Creaza o camera de inceput "Start" si pentru fiecare crawler creaza cate o camera in fiecare directie pe care acestia o aleg
         RoomController.instance.LoadRoom("Start", 0, 0);
 
         foreach(Vector2Int roomLocation in rooms)

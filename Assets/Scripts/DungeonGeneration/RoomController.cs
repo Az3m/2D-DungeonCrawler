@@ -208,22 +208,9 @@ public class RoomController : MonoBehaviour
                     foreach (EnemyController enemy in enemies)
                     {
                         enemy.notInRoom = true;
-                        //Debug.Log("Not in room");
+
                     }
-
-                    //foreach(Door door in room.GetComponentsInChildren<Door>())
-                    //{
-                    //    door.DoorCollider.SetActive(false);
-                    //}
                 }
-                //else{
-                //    foreach (Door door in room.GetComponentsInChildren<Door>())
-                //    {
-                //        door.DoorCollider.SetActive(true);
-                //    }
-                //}
-
-               
             }
             else
             {
