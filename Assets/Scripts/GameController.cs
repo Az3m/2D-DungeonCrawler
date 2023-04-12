@@ -73,7 +73,14 @@ public class GameController : MonoBehaviour
 
     public static void HealPlayer(float healAmount)
     {
-        health = Mathf.Min(maxHealth, health + healAmount);
+        if(health + healAmount > MaxHealth) 
+        {
+            health = maxHealth;
+        }
+        else
+        {
+            health += healAmount;
+        }
     }
 
     public static void DamageChange(float damage)
